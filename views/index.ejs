@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"> calculatrice</div>
+            </div>
+            <div class="card-body">
+
+                <form action="/add" method="POST" class="form col-11" >
+
+                    <div class="form-group row">
+                        <div class="col-sm-2">
+                            <input type="number" name="chiffre1" id="chiffre1" class="form-control m-2" >
+                            <input type="number" name="chiffre2" id="chiffre2" class="form-control m-2" >
+                        </div>
+                        <div class="col-sm-">
+                            <div class="form-check m-2">
+                                <input type="radio" name="signe" id="plus" value="+" class="form-check-input" >
+                                <label for="plus" class="form-check-label">+</label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input type="radio" name="signe" id="moins" value="-" class="form-check-input" >
+                                <label for="moins" class="form-check-label">-</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-check m-2">
+                                <input type="radio" name="signe" id="mutiplier" value="*" class="form-check-input" >
+                                <label for="multiplier" class="form-check-label">x</label>
+                            </div>
+                            <div class="form-check m-2">
+                                <input type="radio" name="signe" id="diviser" value="/" class="form-check-input" >
+                                <label for="diviser" class="form-check-label">:</label>
+                            </div>
+
+                            <input type="submit" value="ajouter" class="btn btn-primary">
+                        </div>
+                        
+                    </div>
+
+                  
+
+                </form>
+
+
+            </div>
+
+    </div>
+        <br><br>
+        <div class="row">
+
+                <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Chiffre 1</th>
+                                <th scope="col">Opérateur</th>
+                                <th scope="col">Chiffre 2</th>
+                                <th scope="col">Résultat</th>
+                                <th scope="col">Verrou</th>
+                                <th scope="col">actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         
+                            <% for(let i =0; i<calculs.length; i++){ %>
+                                    <tr>
+                                    <td><%= calculs[i].chiffre1%></td>
+                                    <td><%= calculs[i].operateur %></td>
+                                    <td><%= calculs[i].chiffre2%></td>
+                                    <td><%= calculs[i].resultat%></td>
+                                    <td><input name ="statut" type="checkbox" onclick="doalert(<%=calculs[i].id%>)" <% if (calculs[i].statut==1){%> checked disabled<%}%>></td>
+                                    <td><a class="btn btn-success" href="<% if (calculs[i].statut==1){%> / <%}else{%> /calcul/<%=calculs[i].id %> <%}%> " style="margin-right:10px"  >calculer</a><a  class="btn btn-warning" href="<% if (calculs[i].statut==1){%> / <%}else{%> /edit/<%=calculs[i].id %> <%}%>" <%if (calculs[i].statut==1){%> disabled <%}%>>modifier</a></td>
+                                   
+                                   
+                                </tr>
+                                  <% } %>
+                         
+                      
+                        </tbody>
+                      </table>
+
+               
+        </div>
+
+    </div>
+    <script>
+        function doalert(id) {
+                if (!id.checked) {
+                    window.location.replace("/verrou/"+id);
+                } else {
+                    alert ("bye");
+                }
+        }
+    </script>
+</body>
+
+</html>
