@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
 
-                <form action="/add" method="POST" class="form col-11" >
+                <form action="/update/<%= edit[0].id%>" method="POST" class="form col-11" >
 
                     <div class="form-group row">
                         <div class="col-sm-2">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-sm-1">
                             <div class="form-check m-2">
-                                <input type="radio" name="operateur id="mutiplier" value="*" class="form-check-input" <% if (locals.edit[0].operateur=='*'){%> checked <%}%>>
+                                <input type="radio" name="operateur" id="mutiplier" value="*" class="form-check-input" <% if (locals.edit[0].operateur=='*'){%> checked <%}%>>
                                 <label for="multiplier" class="form-check-label">x</label>
                             </div>
                             <div class="form-check m-2">
@@ -74,14 +74,14 @@
                         </thead>
                         <tbody>
                          
-                            <% for(let i =0; i<operations.length; i++){ %>
+                            <% for(let i =0; i<calculs.length; i++){ %>
                                     <tr>
-                                    <td><%= operations[i].chiffre1%></td>
-                                    <td><%= operations[i].operateur %></td>
-                                    <td><%= operations[i].chiffre2%></td>
-                                    <td><%= operations[i].resultat%></td>
-                                    <td><input name ="statut" type="checkbox" onclick="doalert('<%=operations[i]._id%>')" <% if (operations[i].statut==true){%> checked disabled<%}%>></td>
-                                    <td><a class="btn btn-success" href="<% if (operations[i].statut==1){%> / <%}else{%> /calcul/<%=operations[i]._id %> <%}%> " style="margin-right:10px"  >calculer</a><a  class="btn btn-warning" href="<% if (operations[i].statut==1){%> / <%}else{%> /edit/<%=operations[i]._id %> <%}%>" <%if (operations[i].statut==1){%> disabled <%}%>>modifier</a></td>
+                                    <td><%= calculs[i].chiffre1%></td>
+                                    <td><%= calculs[i].operateur %></td>
+                                    <td><%= calculs[i].chiffre2%></td>
+                                    <td><%= calculs[i].resultat%></td>
+                                    <td><input name ="statut" type="checkbox" onclick="doalert('<%= calculs[i]._id %>')"  <% if (calculs[i].statut==true){%> checked disabled<%}%> ></td>
+                                    <td><a class="btn btn-success" href="<% if (calculs[i].statut==1){%> / <%}else{%> /calcul/<%=calculs[i]._id%> <%}%> " style="margin-right:10px"  >calculer</a><a  class="btn btn-warning" href="<% if (calculs[i].statut==1){%> / <%}else{%> /edit/<%=calculs[i]._id %> <%}%>" <%if (calculs[i].statut==1){%> disabled <%}%>>modifier</a></td>
                                    
                                    
                                 </tr>
